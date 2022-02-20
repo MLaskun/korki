@@ -30,8 +30,6 @@ export default class App extends React.Component<{}, { todoInput: string, todos:
       todos,
       todoInput: ''
     });
-
-    console.log(this.state);
     
   }
 
