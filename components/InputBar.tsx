@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-const InputBar = (props:{textChange:(todoinput: string)=> void; todoInput?: string}) => {
+const InputBar = (props:{textChange:(todoinput: string)=> void; todoInput?: string; addNewTodo(): any;}) => {
     return(
         <View style={styles.inputContainer}>
             <TextInput 
@@ -8,7 +8,7 @@ const InputBar = (props:{textChange:(todoinput: string)=> void; todoInput?: stri
                 onChangeText={(todoInput) => props.textChange(todoInput)}
                 value={props.todoInput}
             />
-            <TouchableOpacity style={styles.addButton}>
+            <TouchableOpacity style={styles.addButton} onPress={()=> props.addNewTodo()}>
                 <Text style={styles.addButtonText}>ADD</Text>
             </TouchableOpacity>
         </View>
