@@ -12,7 +12,7 @@ export default class App extends React.Component<{}, { todoInput: string, todos:
       todoInput: '',
       todos: [
         {id: 0, title: 'Something', done: false},
-        {id: 1, title: 'Something else', done: false}
+        {id: 1, title: 'Something else', done: true}
       ]
     }
   }
@@ -33,6 +33,26 @@ export default class App extends React.Component<{}, { todoInput: string, todos:
     
   }
 
+  toggleDone(item: any) {
+    let todos = this.state.todos;
+
+    todos = todos.map((todo)=>{
+      if(todo.id == item.id){
+        todo.done = !todo.done;
+      }
+      return todo;
+    })
+    this.setState({todos});
+  }
+
+  removeTodo(item: any) {
+    let todos = this.state.todos;
+
+    todos = todos.filter((todo)=> todo.id !== item.id);
+
+    this.setState({todos});
+  }
+
   render(){
     return (
       <View style={styles.container}>
@@ -49,7 +69,11 @@ export default class App extends React.Component<{}, { todoInput: string, todos:
           keyExtractor={(item, index)=> index.toString()}
           renderItem={ ({item, index})=> {
             return(
-              <TodoItem todoItem={item}/>
+              <TodoItem 
+                todoItem={item} 
+                toggleDone={()=> this.toggleDone(item)}
+                removeTodo={()=>this.removeTodo(item)}
+              />
             )
           }}
         />
